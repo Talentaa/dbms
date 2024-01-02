@@ -1,0 +1,175 @@
+Sample sql statements supported by the DBMS:
+
+
+
+
+create database WYO bill;
+
+create table supplied
+(SupplierNo char(5),
+ItemNo char(5),
+Quantity int,
+Quantit float,
+Quanti int,
+Quant int,
+Quan int,
+primary key (SupplierNo, ItemNo),
+foreign key (SupplierNo) references supplier(SupplierNo),
+foreign key (ItemNo) references item(ItemNo));
+
+create table supplier
+(SupplierNo char(5),
+SupplierName char(20) unique,
+City char(20) not null,
+primary key (SupplierNo));
+
+create table st
+(StudentID int,
+FirstName char(20) not null unique,
+LastName char(20),
+Major char(20) unique,
+primary key (StudentID),
+foreign key (Major) references course(student));
+
+create table takes
+(StudentID int,
+CourseNum char(10),
+primary key (StudentID, CourseNum), 
+foreign key (StudentID) references student (StudentID),
+foreign key (CourseNum) references course (CourseNum));
+
+create table course
+(CourseNum char(10),
+CourseName char(30),
+InstructorName char(30),
+primary key (CourseNum));
+
+insert into supplier values('8', '5', '6', 'Knute', 'hello');
+insert into supplier values('S2', 'Jones', 'Chicago', 'f');
+insert into supplier values('S3', 'Blake', 'Chicago');
+insert into supplier values('S4', 'Clark', 'Boston');
+insert into supplier values('S5', 'Adams', 'Boston');
+
+insert into course values ('CoSc1030', 'Computer Science 1', 'Davidson');
+insert into course values ('CoSc2030','Computer Science 2', 'Bailey');
+insert into course values ('CoSc3020','Analysis of Algorithms', 'Peterson');
+
+select * from course
+where CourseNum = 'csos' and InstructorName = 'chasds';
+
+
+describe table supplied;
+describe table supplier;
+describe table student;
+describe table takes;
+describe table course;
+
+drop attribute studentID from student;
+drop table student;
+drop index c_fn;
+drop database WYO;
+
+describe database wal_mart;
+
+
+
+select * from supplier s;
+
+(select i.ItemNo, i.ItemName
+from item i, supplied su
+where i.ItemNo = su.ItemNo and su.SupplierNo <= 'S2'
+and not i.ItemNo = su.ItemNo and su.SupplierNo < 'S2')
+union
+(select i.ItemNo, i.ItemName
+from item i, supplied su
+where i.ItemNo > su.ItemNo and not sa.SupplierNo = 'S4'
+and i.ItemNo >= su.ItemNo and su.SupplierNo <= 'S2');
+
+select branch#, item# from own
+where no_of_copies > 0;
+
+select b.branch#, i.item# from own
+where no_of_copies > 0;
+
+select t.coursenum 
+from t takes, student 
+WHERE firstname = 'John';
+
+select s.coursenum
+from student s;
+
+select distinct c.instructorname, s.studentid, hello    
+from course c, takes t, student
+WHERE not FirstName = 'John' 
+and LastName = 'Johnson' 
+and student.studentid <= takes.studentid 
+and course.coursenum >= takes.coursenum
+and student.studentid < takes.studentid 
+and course.coursenum > takes.coursenum
+and student.studentid = takes.studentid 
+and not course.coursenum = takes.coursenum; 
+
+select coursenum
+FROM takes, STUDENT
+where not firstname = 'John' and not lastname = 'Johnson'
+and student.studentid = takes.studentid;
+
+select distinct c1.instructorname 
+FROM course c1, COURSE c2, course c3 
+WHERE not c1.coursenum = c2.coursenum and not c1.coursenum = c3.coursenum
+and not c2.coursenum = c3.coursenum and c1.instructorname = c2.instructorname 
+and  c1.instructorname = c3.instructorname and  c2.instructorname = c3.instructorname;
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+create database test fred;
+
+create table myself
+(Supplier char(5),
+Item char(5),
+Q int,
+primary key (Supplier, ItemNo),
+foreign key (Supplier) references sup(Supplier),
+foreign key (Item) references item(Item));
+
+create table sup
+(SupplierN char(5),
+SupplierNam char(20) unique,
+Cit char(20) not null,
+primary key (SupplierN));
+
+create table studen
+(Stude int,
+FirstName char(20) not null unique,
+LastName char(20),
+Majo char(20) unique,
+primary key (Stude),
+foreign key (Majo) references course(stud));
+
+
+
+
+
+
+----------------------------------------------------------------------------
+
+
+
+
+load wal_mart;
+-----------------------------------------------------
+NOT CURRENTLY SUPPORTED!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+create table supplier
+(SupplierNo char(5),
+SupplierName varchar(20) primary key not null,
+City varchar(20));
+
+create table student
+(StudentID int primary key not null,
+FirstName varchar(20) not null,
+LastName varchar(20),
+Major varchar(20));
